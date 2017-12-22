@@ -20,10 +20,9 @@ eureka:
       defaultZone: http://127.0.0.1:8761/eureka/
 
 ###
-#   RabbitMQ Settings
+#   Kafka Settings for Spring Cloud Bus
 ###
 spring:
-  rabbitmq:
-    host: 127.0.0.1
-    username: guest
-    password: guest
+  kafka:
+    bootstrap-servers: http://127.0.0.1:9092
+
