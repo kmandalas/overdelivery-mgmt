@@ -1,0 +1,29 @@
+###
+#   Hystrix Settings
+###
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 10000
+
+###
+#   Eureka Settings
+###
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    serviceUrl:
+      defaultZone: http://127.0.0.1:8761/eureka/
+
+###
+#   RabbitMQ Settings
+###
+spring:
+  rabbitmq:
+    host: 127.0.0.1
+    username: guest
+    password: guest

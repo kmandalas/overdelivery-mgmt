@@ -1,0 +1,18 @@
+{
+  "eventFrequency": 400,
+  "varyEventFrequency": true,
+  "repeatWorkflow": true,
+  "timeBetweenRepeat": 1500,
+  "varyRepeatFrequency": true,
+  "steps": [
+    {
+      "config": [
+        {
+          "adGroupId": "random(100, 101, 102, 103, 104)",
+          "domain": "random('batteries.com', 'eggs.com', 'diapers.com', 'doughnuts.com', 'beer.gr')"
+        }
+      ],
+      "duration": 0
+    }
+  ]
+}

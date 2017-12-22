@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.kmandalas.github</groupId>
+	<artifactId>overdelivery-mgmt</artifactId>
+	<version>1.0-SNAPSHOT</version>
+	<packaging>pom</packaging>
+	<name>aodm</name>
+	<description>Ads Over-delivery Management (AODM)</description>
+
+	<modules>
+		<module>config</module>
+		<module>registry</module>
+		<module>gateway</module>
+		<module>monitoring</module>
+		<module>inventory-service</module>
+		<module>budget-service</module>
+		<module>spend-aggregator</module>
+		<module>predicted-spend-consumer</module>
+		<module>impressions-consumer</module>
+		<!--<module>impressions-producer-sim</module>-->
+		<module>common</module>
+	</modules>
+
+
+</project>

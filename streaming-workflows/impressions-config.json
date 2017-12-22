@@ -1,0 +1,18 @@
+{
+  "workflows": [
+    {
+      "workflowName": "impressions",
+      "workflowFilename": "impressions.json"
+    }
+  ],
+  "producers": [
+    {
+      "type": "kafka-json",
+      "broker.server": "127.0.0.1",
+      "broker.port": 9092,
+      "topic": "impressions",
+      "sync": false,
+      "keyAttribute": "adGroupId"
+    }
+  ]
+}

@@ -1,0 +1,42 @@
+server:
+  port: 4000
+
+###
+#   Hystrix Settings
+###
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 20000
+
+###
+#   Ribbon Settings
+###
+ribbon:
+  ReadTimeout: 20000
+  ConnectTimeout: 20000
+
+###
+#   Zuul Settings
+###
+zuul:
+  ignoredServices: '*'
+  host:
+    connect-timeout-millis: 20000
+    socket-timeout-millis: 20000
+
+  routes:
+    budget-service:
+      path: /budget/**
+      serviceId: budget-service
+      stripPrefix: false
+      sensitiveHeaders:
+
+    inventory-service:
+      path: /inventory/**
+      serviceId: inventory-service
+      stripPrefix: false
+      sensitiveHeaders:

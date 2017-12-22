@@ -1,0 +1,18 @@
+server:
+  context-path: /inventory
+  port: 10800
+
+###
+#   Kafka Settings
+###
+spring:
+  kafka:
+    bootstrap-servers: http://127.0.0.1:9092
+    template:
+      default-topic: ad-insertion-input
+
+###
+#   Custom
+###
+impression-rate: 0.5
+action-rate: 1

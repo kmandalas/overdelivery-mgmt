@@ -1,0 +1,14 @@
+server:
+  port: 0
+
+###
+#   Kafka Settings
+###
+spring:
+  kafka:
+    bootstrap-servers: http://127.0.0.1:9092
+
+###
+#   Custom
+###
+source-topic: impressions

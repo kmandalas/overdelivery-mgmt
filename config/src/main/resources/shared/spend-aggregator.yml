@@ -1,0 +1,13 @@
+server:
+  port: 0
+
+###
+#   Custom
+###
+kstream.spend.aggregator:
+  application-id: spend-aggregator
+  kafka-bootstrap-servers: http://127.0.0.1:9092
+  source-topic: ad-insertion-input
+  output-topic: predicted-spend-output
+  window-size: 10000
+  store-name: ad-group-id-sum
