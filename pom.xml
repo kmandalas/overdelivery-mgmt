@@ -21,7 +21,6 @@
 		<module>spend-aggregator</module>
 		<module>predicted-spend-consumer</module>
 		<module>impressions-consumer</module>
-		<!--<module>impressions-producer-sim</module>-->
 		<module>common</module>
 	</modules>
 
