@@ -9,8 +9,12 @@ import org.springframework.messaging.simp.broker.BrokerAvailabilityEvent;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+import com.github.kmandalas.aodm.gateway.transport.ChartDTO;
+
 @Component
 public class RandomDataGenerator implements ApplicationListener<BrokerAvailabilityEvent> {
+
+	private static final int DEFAULT_AD_GROUP_ID = 101;
 
 	private final MessageSendingOperations<String> messagingTemplate;
 
@@ -25,6 +29,12 @@ public class RandomDataGenerator implements ApplicationListener<BrokerAvailabili
 
 	@Scheduled(fixedDelay = 1000)
 	public void sendDataUpdates() {
-		this.messagingTemplate.convertAndSend("/data", new Random().nextInt(100));
+		ChartDTO dto = ChartDTO.builder()
+				.adGroupId(DEFAULT_AD_GROUP_ID)
+				.actual(new Random().nextDouble() * 100)
+				.predicted(new Random().nextDouble() * 100)
+				.build();
+
+		this.messagingTemplate.convertAndSend("/data", dto);
 	}
 }

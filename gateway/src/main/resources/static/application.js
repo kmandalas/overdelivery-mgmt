@@ -1,11 +1,13 @@
-var randomData;
+var actualSpendData;
+var predictedSpendData;
 
-$('#randomDataChart').highcharts({
+$('#aodmDataChart').highcharts({
 	chart: {
 		type: 'line',
 		events: {
 			load: function () {
-				randomData = this.series[0];
+				actualSpendData = this.series[0];
+				predictedSpendData = this.series[1];
 			}
 		}
 	},
@@ -34,7 +36,10 @@ $('#randomDataChart').highcharts({
 		}
 	},
 	series: [{
-		name: 'Data',
+		name: 'Actual',
+		data: []
+	}, {
+		name: 'Predicted',
 		data: []
 	}]
 });
@@ -45,9 +50,16 @@ var client = Stomp.over(socket);
 client.connect('', '', function (frame) {
 
 	client.subscribe("/data", function (message) {
-		var point = [(new Date()).getTime(), parseInt(message.body)];
-		var shift = randomData.data.length > 60;
-		randomData.addPoint(point, true, shift);
+		var stamp = (new Date()).getTime();
+		var dto = $.parseJSON(message.body);
+
+		var point0 = [stamp, parseFloat(dto.actual)];
+		var shift0 = actualSpendData.data.length > 60;
+		actualSpendData.addPoint(point0, true, shift0);
+
+		var point1 = [stamp, parseFloat(dto.predicted)];
+		var shift1 = predictedSpendData.data.length > 60;
+		predictedSpendData.addPoint(point1, true, shift1);
 	});
 
 });

@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.github.kmandalas.aodm.budget.domain.Account;
 import com.github.kmandalas.aodm.budget.service.AccountService;
 import com.github.kmandalas.aodm.budget.transport.AccountDTO;
+import com.github.kmandalas.aodm.budget.transport.ChartDTO;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -42,6 +43,12 @@ public class BudgetController {
 		BeanUtils.copyProperties(account, dto);
 
 		return dto;
+	}
+
+	@GetMapping("/poll/{adGroupId}")
+	public ChartDTO poll(@PathVariable int adGroupId) {
+		// todo...
+		return null;
 	}
 
 	// @PutMapping("/actual/{adGroupId}/") | TODO: check if this works and if yes apply it everywhere

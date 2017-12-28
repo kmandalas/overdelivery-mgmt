@@ -1,4 +1,4 @@
-package com.github.kmandalas.aodm.gateway.transport;
+package com.github.kmandalas.aodm.budget.transport;
 
 import lombok.Builder;
 import lombok.Getter;
