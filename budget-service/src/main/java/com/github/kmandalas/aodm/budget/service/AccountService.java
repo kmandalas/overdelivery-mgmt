@@ -2,9 +2,8 @@ package com.github.kmandalas.aodm.budget.service;
 
 import java.util.List;
 
-import org.springframework.data.util.Pair;
-
 import com.github.kmandalas.aodm.budget.domain.Account;
+import com.github.kmandalas.aodm.budget.domain.AmountsOnly;
 
 public interface AccountService {
 
@@ -16,5 +15,5 @@ public interface AccountService {
 
 	void updateInFlightSpend(int adGroupId, double amount);
 
-	Pair<Double, Double> poll(int adGroupId);
+	AmountsOnly poll(int adGroupId);
 }

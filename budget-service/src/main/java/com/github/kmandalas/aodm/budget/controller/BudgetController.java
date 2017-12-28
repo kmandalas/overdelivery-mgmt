@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.github.kmandalas.aodm.budget.domain.Account;
+import com.github.kmandalas.aodm.budget.domain.AmountsOnly;
 import com.github.kmandalas.aodm.budget.service.AccountService;
 import com.github.kmandalas.aodm.budget.transport.AccountDTO;
 import com.github.kmandalas.aodm.budget.transport.ChartDTO;
@@ -47,8 +48,14 @@ public class BudgetController {
 
 	@GetMapping("/poll/{adGroupId}")
 	public ChartDTO poll(@PathVariable int adGroupId) {
-		// todo...
-		return null;
+		AmountsOnly amountsOnly = accountService.poll(adGroupId);
+		ChartDTO dto = ChartDTO.builder()
+				.adGroupId(adGroupId)
+				.actual(amountsOnly.getActualSpend())
+				.predicted(amountsOnly.getInFlightSpend())
+				.build();
+
+		return dto;
 	}
 
 	// @PutMapping("/actual/{adGroupId}/") | TODO: check if this works and if yes apply it everywhere

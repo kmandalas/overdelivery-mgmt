@@ -3,11 +3,11 @@ package com.github.kmandalas.aodm.budget.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.util.Pair;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.github.kmandalas.aodm.budget.domain.Account;
+import com.github.kmandalas.aodm.budget.domain.AmountsOnly;
 import com.github.kmandalas.aodm.budget.repository.AccountRepository;
 
 @Service
@@ -24,12 +24,12 @@ public class AccountServiceImpl implements AccountService {
 
 	@Override
 	public Account findByAdGroupId(final int adGroupId) {
-		return repository.findByAdGroupId(adGroupId);
+		return repository.findOneByAdGroupId(adGroupId);
 	}
 
 	@Override
 	public void updateActualSpend(final int adGroupId) {
-		Account account = repository.findByAdGroupId(adGroupId);
+		Account account = repository.findOneByAdGroupId(adGroupId);
 		account.increaseActual(account.getItemPrice());
 
 		repository.save(account);
@@ -37,15 +37,14 @@ public class AccountServiceImpl implements AccountService {
 
 	@Override
 	public void updateInFlightSpend(final int adGroupId, final double amount) {
-		Account account = repository.findByAdGroupId(adGroupId);
+		Account account = repository.findOneByAdGroupId(adGroupId);
 		account.increaseInflight(amount);
 
 		repository.save(account);
 	}
 
 	@Override
-	public Pair<Double, Double> poll(final int adGroupId) {
-		// todo...
-		return null;
+	public AmountsOnly poll(final int adGroupId) {
+		return repository.findByAdGroupId(adGroupId);
 	}
 }
