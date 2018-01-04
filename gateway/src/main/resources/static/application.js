@@ -25,13 +25,13 @@ $('#aodmDataChart').highcharts({
 		max: 100
 	},
 	legend: {
-		enabled: false
+		enabled: true
 	},
 	plotOptions: {
 		series: {
 			threshold: 0,
 			marker: {
-				enabled: false
+				enabled: true
 			}
 		}
 	},
