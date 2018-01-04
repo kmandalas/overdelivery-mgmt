@@ -64,11 +64,11 @@ Run each service in different console/terminal. The recommended order is the fol
           
 ### Running the Functional services ###
 #### 1. Budget Service
-     cd <dir>/budget/
+     cd <dir>/budget-service/
      mvn spring-boot:run
 
 #### 2. Inventory Service
-     cd <dir>/inventory/
+     cd <dir>/inventory-service/
      mvn spring-boot:run
 
 ### Running the kafka consumers and stream ###
@@ -93,7 +93,7 @@ Run each service in different console/terminal. The recommended order is the fol
      mvn spring-boot:run    
 
 ### Eureka Dashboard ###
-Once you have started all the services, check the [Eureka dashboard] (http://localhost:8761) 
+Once you have started all the services, check the [Eureka dashboard](http://localhost:8761) 
 
 Keep in mind that the Service Discovery mechanism needs some time after all applications startup. 
 Any service is not available for discovery by clients until the instance, the Eureka server and the client all have the same metadata in their local cache, 
