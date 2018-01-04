@@ -7,7 +7,7 @@ A simplified proof-of-concept project for managing ads over-delivery utilizing S
 1.    Java 8
 2.    Maven
 
-## Requirements to run the examples
+## Requirements to run the example
 
 1.    [Apache Kafka](https://kafka.apache.org/downloads). See section with binary downloads and the recommended stable version. At the moment of 
 writing the version used is: kafka_2.11-0.10.1.0
