@@ -27,36 +27,42 @@ import com.github.kmandalas.aodm.aggregator.serializers.InsertionSerde;
 @EnableConfigurationProperties(SpendAggregatorProperties.class)
 public class InFlightSpendSum {
 
-	@Autowired
-	SpendAggregatorProperties spendAggregatorProperties;
+	private final SpendAggregatorProperties appConfig;
 
 	private KafkaStreams streams;
+
+	@Autowired
+	public InFlightSpendSum(final SpendAggregatorProperties appConfig) {
+		this.appConfig = appConfig;
+	}
 
 	@PostConstruct
 	public void runStream() {
 
-		Properties config = new Properties();
-		config.put(StreamsConfig.BOOTSTRAP_SERVERS_CONFIG, spendAggregatorProperties.getKafkaBootstrapServers());
-		config.put(StreamsConfig.APPLICATION_ID_CONFIG, spendAggregatorProperties.getApplicationId());
-		config.put(StreamsConfig.DEFAULT_KEY_SERDE_CLASS_CONFIG, Serdes.String().getClass().getName());
-		config.put(StreamsConfig.DEFAULT_VALUE_SERDE_CLASS_CONFIG, InsertionSerde.class);
+		final Properties streamsConfig = new Properties();
+		streamsConfig.put(StreamsConfig.BOOTSTRAP_SERVERS_CONFIG, appConfig.getKafkaBootstrapServers());
+		streamsConfig.put(StreamsConfig.APPLICATION_ID_CONFIG, appConfig.getApplicationId());
+		streamsConfig.put(StreamsConfig.DEFAULT_KEY_SERDE_CLASS_CONFIG, Serdes.String().getClass().getName());
+		streamsConfig.put(StreamsConfig.DEFAULT_VALUE_SERDE_CLASS_CONFIG, InsertionSerde.class);
 
-		config.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
+		streamsConfig.put(StreamsConfig.STATE_DIR_CONFIG, appConfig.getStateDirConfig());
+
+		streamsConfig.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
 
 		KStreamBuilder kStreamBuilder = new KStreamBuilder();
-		KStream<String, Insertion> insertions = kStreamBuilder.stream(spendAggregatorProperties.getSourceTopic());
+		KStream<String, Insertion> insertions = kStreamBuilder.stream(appConfig.getSourceTopic());
 
 		final KTable<Windowed<String>, Double> windowedSums = insertions
 				.map((key, value) -> new KeyValue<>(value.getAdGroupId().toString(), value.getInFlightSpend()))
 				.groupByKey(Serdes.String(), Serdes.Double())
-				.reduce((v1, v2) -> v1 + v2, TimeWindows.of(spendAggregatorProperties.getWindowSize()), spendAggregatorProperties.getStoreName());
+				.reduce((v1, v2) -> v1 + v2, TimeWindows.of(appConfig.getWindowSize()));
 
 		windowedSums
 				.toStream()
 				.map((key, value) -> new KeyValue<>(key.key(), value))
-				.to(spendAggregatorProperties.getOutputTopic());
+				.to(appConfig.getOutputTopic());
 
-		streams = new KafkaStreams(kStreamBuilder, config);
+		streams = new KafkaStreams(kStreamBuilder, streamsConfig);
 		streams.start();
 	}
 

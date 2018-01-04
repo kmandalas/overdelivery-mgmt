@@ -1,0 +1,7 @@
+kstream.spend.aggregator:
+  application-id: spend-aggregator-test-stream
+  kafka-bootstrap-servers: ${spring.embedded.kafka.brokers}
+  source-topic: ad-insertion-input-test
+  output-topic: predicted-spend-output-test
+  window-size: 10000
+  state-dir-config: /tmp/kafka-streams-test

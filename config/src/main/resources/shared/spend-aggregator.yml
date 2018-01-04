@@ -10,4 +10,4 @@ kstream.spend.aggregator:
   source-topic: ad-insertion-input
   output-topic: predicted-spend-output
   window-size: 10000
-  store-name: ad-group-id-sum
+  state-dir-config: /tmp/kafka-streams

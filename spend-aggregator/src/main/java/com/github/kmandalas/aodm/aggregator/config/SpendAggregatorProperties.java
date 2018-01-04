@@ -10,15 +10,7 @@ import lombok.Setter;
 @Setter
 public class SpendAggregatorProperties {
 
-	private String applicationId;
-
-	private String kafkaBootstrapServers;
-
-	private String sourceTopic;
-
-	private String outputTopic;
-
-	private String storeName;
+	private String applicationId, kafkaBootstrapServers, sourceTopic, outputTopic, stateDirConfig;
 
 	private long windowSize;
 }
