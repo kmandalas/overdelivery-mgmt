@@ -141,6 +141,8 @@ the budget-service using [Feign](https://cloud.spring.io/spring-cloud-netflix/mu
 
 In order to access the in-memory database, view the schema etc. go to your [H2 console](http://localhost:10600/budget/console). As jdbc-url, enter: `jdbc:h2:mem:budget-db`
 
+![alt text](https://github.com/kmandalas/overdelivery-mgmt/raw/master/assets/H2_Console.png "H2 Console")
+
 You may find some sample configuration files for the json data generator within the folder [streaming-workflows](https://github.com/kmandalas/overdelivery-mgmt/tree/master/streaming-workflows). 
 Have in mind that the values in these sample files are over-simplistic. Even in a near real-world simulation scenario, multiple streams may need to
  be started with different `eventFrequency / varyEventFrequency / varyRepeatFrequency` parameters etc.
@@ -172,6 +174,8 @@ of actual spend and in-flight spend for a single advertiser (for the moment the 
 
 In order to view the page navigate your browser to: 
 - http://localhost:4000
+
+![alt text](https://github.com/kmandalas/overdelivery-mgmt/raw/master/assets/chart.gif "demo page")
 
 ## Status
 - coding: in progress
