@@ -184,5 +184,5 @@ In order to view the page navigate your browser to:
 - code coverage: in progress
 
 ## Feedback welcome
-I try to add and improve this project during my... "free" time. I would greatly appreciate your help. Feel free to contact me with any 
-questions/corrections and suggestions as it is still needs lots of stuff to be added and improved :)
+I try add things and improve this project during my... "free" time. I would greatly appreciate your help. Feel free to contact me with any 
+questions/corrections and suggestions.
