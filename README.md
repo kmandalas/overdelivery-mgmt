@@ -140,7 +140,6 @@ this way there is so there is no way to bypass API and access persistance data d
 the budget-service using [Feign](https://cloud.spring.io/spring-cloud-netflix/multi/multi_spring-cloud-feign.html) in order to retrieve/update data.
 
 In order to access the in-memory database, view the schema etc. go to your [H2 console](http://localhost:10600/budget/console). As jdbc-url, enter: `jdbc:h2:mem:budget-db`
-
 ![alt text](https://github.com/kmandalas/overdelivery-mgmt/raw/master/assets/H2_Console.png "H2 Console")
 
 You may find some sample configuration files for the json data generator within the folder [streaming-workflows](https://github.com/kmandalas/overdelivery-mgmt/tree/master/streaming-workflows). 
@@ -174,7 +173,6 @@ of actual spend and in-flight spend for a single advertiser (for the moment the 
 
 In order to view the page navigate your browser to: 
 - http://localhost:4000
-
 ![alt text](https://github.com/kmandalas/overdelivery-mgmt/raw/master/assets/chart.gif "demo page")
 
 ## Status
