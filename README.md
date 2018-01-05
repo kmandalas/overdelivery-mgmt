@@ -140,6 +140,7 @@ this way there is so there is no way to bypass API and access persistance data d
 the budget-service using [Feign](https://cloud.spring.io/spring-cloud-netflix/multi/multi_spring-cloud-feign.html) in order to retrieve/update data.
 
 In order to access the in-memory database, view the schema etc. go to your [H2 console](http://localhost:10600/budget/console). As jdbc-url, enter: `jdbc:h2:mem:budget-db`
+
 ![alt text](https://github.com/kmandalas/overdelivery-mgmt/raw/master/assets/H2_Console.png "H2 Console")
 
 You may find some sample configuration files for the json data generator within the folder [streaming-workflows](https://github.com/kmandalas/overdelivery-mgmt/tree/master/streaming-workflows). 
@@ -166,7 +167,7 @@ A kafka consumer [impressions-consumer](https://github.com/kmandalas/overdeliver
 messages of the `impressions` topic and updates the `actual_spend` accordingly (by calling the budget-service via Feign).
 
 
-## Observer the in-flight VS actual spend actuation
+## Observe the in-flight VS actual spend actuation
 A single html page is used to display a "live" dual-series chart for a single advertiser. This mini Spring Boot web-app resides in the 
 [gateway module](https://github.com/kmandalas/overdelivery-mgmt/tree/master/gateway). It uses web-sockets to send periodically to the client pairs 
 of actual spend and in-flight spend for a single advertiser (for the moment the one with adGroupId: 101).
