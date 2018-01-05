@@ -1,5 +1,3 @@
-[![Build Status] (pending)]
-[![codecov.io] (pending)]
 [![GitHub license](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/kmandalas/overdelivery-mgmt/blob/master/LICENCE)
 
 # overdelivery-mgmt
