@@ -165,7 +165,13 @@ A kafka consumer [impressions-consumer](https://github.com/kmandalas/overdeliver
 messages of the `impressions` topic and updates the `actual_spend` accordingly (by calling the budget-service via Feign).
 
 
-## Observer the in-flight VS actual spend actuation 
+## Observer the in-flight VS actual spend actuation
+A single html page is used to display a "live" dual-series chart for a single advertiser. This mini Spring Boot web-app resides in the 
+[gateway module](https://github.com/kmandalas/overdelivery-mgmt/tree/master/gateway). It uses web-sockets to send periodically to the client pairs 
+of actual spend and in-flight spend for a single advertiser (for the moment the one with adGroupId: 101).
+
+In order to view the page navigate your browser to: 
+- http://localhost:4000
 
 ## Status
 - coding: in progress
