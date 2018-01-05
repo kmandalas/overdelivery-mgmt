@@ -138,7 +138,7 @@ messages of the `predicted-spend-output` topic and updates the `inflight_spend` 
 
 All budget retrieval and update actions are done via the [budget-service](https://github.com/kmandalas/overdelivery-mgmt/tree/master/budget-service).
 An H2 database is used, with a single table keeping the data for this simple scenario. The data-ownership belongs to the budget-service. In 
-this way there is so there is no way to bypass API and access persistance data directly. Kafka consumers, inventory-service etc. all interact with 
+this way it's not possible to bypass API and access persistence data directly. Kafka consumers, inventory-service etc. all interact with 
 the budget-service using [Feign](https://cloud.spring.io/spring-cloud-netflix/multi/multi_spring-cloud-feign.html) in order to retrieve/update data.
 
 In order to access the in-memory database, view the schema etc. go to your [H2 console](http://localhost:10600/budget/console). As jdbc-url, enter: `jdbc:h2:mem:budget-db`
