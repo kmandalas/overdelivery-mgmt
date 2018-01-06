@@ -181,6 +181,11 @@ In order to view the page navigate your browser to:
 - documentation (README.md): in progress
 - code coverage: in progress
 
+**Todo**:
+- [ ] Enable hystrix for inventory-service and budget-service
+- [ ] Enable turbine with the [monitoring app](https://github.com/kmandalas/overdelivery-mgmt/tree/master/monitoring)
+- [ ] Add unit tests for inventory-service and budget-service
+
 ## Feedback welcome
 I try add things and improve this project during my... "free" time. I would greatly appreciate your help. Feel free to contact me with any 
 questions/corrections and suggestions.
