@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: budget-service-test
+  cloud:
+    bus:
+      enabled: false
+    config:
+      enabled: false
+      discovery:
+        enabled: false
+eureka:
+  client:
+    enabled: false
+

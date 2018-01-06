@@ -1,0 +1,14 @@
+###
+#   Kafka Settings
+###
+spring:
+  kafka:
+    bootstrap-servers: ${spring.embedded.kafka.brokers}
+    template:
+      default-topic: ad-insertion-input-test
+
+###
+#   Custom
+###
+impression-rate: 0.5
+action-rate: 1
