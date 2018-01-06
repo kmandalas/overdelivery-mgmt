@@ -19,14 +19,15 @@ writing the version used is: kafka_2.11-0.10.1.0
 ## Setup Instructions
 
 #### Extract the kafka_2.11-0.10.1.0.tgz file ####
-    tar -xvzf kafka_2.11-0.10.1.0.tgz
+
+	tar -xvzf kafka_2.11-0.10.1.0.tgz
 
 
 #### Start zookeeper and kafka
-```
-      kafka-install-dir/bin/zookeeper-server-start.sh kafka-install-dir/conf/zookeeper.properties
-      kafka-install-dir/bin/kafka-server-start.sh kafka-install-dir/conf/server.properties
-```
+
+	kafka-install-dir/bin/zookeeper-server-start.sh kafka-install-dir/conf/zookeeper.properties
+	kafka-install-dir/bin/kafka-server-start.sh kafka-install-dir/conf/server.properties
+
 
 #### Install the Json-Data-Generator  
 Clone/fork the modified version of [JSON Data Generator](https://github.com/kmandalas/json-data-generator) and follow the instructions provided 
@@ -34,21 +35,16 @@ Clone/fork the modified version of [JSON Data Generator](https://github.com/kman
 
 #### Setup the overdelivery-mgmt repo
 Clone or fork the repo
-```
-     git clone git@github.com:kmandalas/overdelivery-mgmt    
-     cd overdelivery-mgmt
-```     
-Then copy the json config files to json generator conf directory
-```
-    cp streaming-workflows/* <dir>/json-data-generator-1.2.0/conf
-```    
-    
+
+	git clone git@github.com:kmandalas/overdelivery-mgmt    
+	cd overdelivery-mgmt
+   
 Create all the topics required by the examples
-```
-     kafka-install-dir/bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic ad-insertion-input
-     kafka-install-dir/bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 2 --topic predicted-spend-output
-     kafka-install-dir/bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 2 --topic impressions
-```     
+
+	kafka-install-dir/bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic ad-insertion-input
+	kafka-install-dir/bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 2 --topic predicted-spend-output
+	kafka-install-dir/bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 2 --topic impressions
+    
 
 ### Running the Infrastructure services ###
 Run each service in different console/terminal. The recommended order is the following:
@@ -56,7 +52,7 @@ Run each service in different console/terminal. The recommended order is the fol
      cd <dir>/config/
      mvn spring-boot:run
      
-#### 2. Registry (Service Discovery using Eureka)
+#### 2. Registry (Service Discovery with Eureka)
      cd <dir>/registry/
      mvn spring-boot:run     
 
@@ -120,11 +116,11 @@ In our case, we simulate the requests sent by a website/frontend with a stream o
 [inventory-service](https://github.com/kmandalas/overdelivery-mgmt/tree/master/inventory-service/src/main/java/com/github/kmandalas/aodm/inventory). 
 This microservice checks if `actual_spend + inflight_spend > daily_budget` and if this is **false**, it sends a message to the 
 `ad-insertion-input` kafka topic. The message looks like:
- ```
- {key: adgroupId, value: inflight_spend}, where
-  - adgroupId = id of the group of ads under same budget constraint.
-  - inflight_spend = price * impression_rate * action_rate
- ``` 
+ 
+	{key: adgroupId, value: inflight_spend}, where
+	- adgroupId = id of the group of ads under same budget constraint.
+	- inflight_spend = price * impression_rate * action_rate
+
 The configuration for both `impression_rate` and `action_rate` is in [inventory-service.yml](https://github.com/kmandalas/overdelivery-mgmt/blob/master/config/src/main/resources/shared/inventory-service.yml)
 For starters the selected values are global and the same for all advertisers:
 - 0.5 (i.e 50%) for the impression rate
@@ -150,19 +146,19 @@ Have in mind that the values in these sample files are over-simplistic. Even in 
  be started with different `eventFrequency / varyEventFrequency / varyRepeatFrequency` parameters etc.
 
 In order to start the streams, first copy the json config files to json generator conf directory:
-```
-    cp streaming-workflows/* <dir>/json-data-generator-1.2.0/conf
-``` 
+
+	cp streaming-workflows/* <dir>/json-data-generator-1.2.0/conf
+
 Then, begin by starting the insertions event stream:
-```
-    java -jar json-data-generator-1.3.1-SNAPSHOT.jar insertions-config.json
-``` 
+
+	java -jar json-data-generator-1.3.1-SNAPSHOT.jar insertions-config.json
+
 
 ### Impressions flow 
 Continue by initiating the impressions event stream:
-```
-    java -jar json-data-generator-1.3.1-SNAPSHOT.jar impressions-config.json
-``` 
+
+	java -jar json-data-generator-1.3.1-SNAPSHOT.jar impressions-config.json
+
 This time the generator sends the messages directly to the `impressions` kafka topic.
 
 A kafka consumer [impressions-consumer](https://github.com/kmandalas/overdelivery-mgmt/tree/master/impressions-consumer) consumes the 
