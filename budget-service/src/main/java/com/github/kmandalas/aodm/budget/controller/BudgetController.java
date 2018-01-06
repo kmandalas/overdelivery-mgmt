@@ -29,6 +29,7 @@ public class BudgetController {
 	AccountService accountService;
 
 	@GetMapping("/eligible")
+	@ResponseStatus(HttpStatus.OK)
 	public List<Account> getEligible() {
 		log.info("Getting the eligible as groups...");
 
@@ -36,6 +37,7 @@ public class BudgetController {
 	}
 
 	@GetMapping("/{adGroupId}")
+	@ResponseStatus(HttpStatus.OK)
 	public AccountDTO getAccount(@PathVariable int adGroupId) {
 		log.info("Getting account info fot ad-group: " + adGroupId);
 
@@ -47,6 +49,7 @@ public class BudgetController {
 	}
 
 	@GetMapping("/poll/{adGroupId}")
+	@ResponseStatus(HttpStatus.OK)
 	public ChartDTO poll(@PathVariable int adGroupId) {
 		AmountsOnly amountsOnly = accountService.poll(adGroupId);
 		ChartDTO dto = ChartDTO.builder()
@@ -59,16 +62,16 @@ public class BudgetController {
 	}
 
 	// @PutMapping("/actual/{adGroupId}/") | TODO: check if this works and if yes apply it everywhere
-	@ResponseStatus(HttpStatus.OK)
 	@RequestMapping(value = "/actual/{adGroupId}", method = RequestMethod.PUT)
+	@ResponseStatus(HttpStatus.OK)
 	public void updateActualSpend(@PathVariable int adGroupId) {
 		log.info("updating actual spend for ad-group-id: " + adGroupId);
 
 		accountService.updateActualSpend(adGroupId);
 	}
 
-	@ResponseStatus(HttpStatus.OK)
 	@RequestMapping(value = "/inFlight/{adGroupId}", method = RequestMethod.PUT)
+	@ResponseStatus(HttpStatus.OK)
 	public void updateInflightSpend(@PathVariable int adGroupId, @RequestBody double amount) {
 		log.info("updating in-flight spend for ad-group-id:: " + adGroupId);
 
