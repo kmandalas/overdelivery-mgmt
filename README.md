@@ -181,7 +181,8 @@ In order to view the page navigate your browser to:
 - [ ] Enable hystrix for inventory-service and budget-service
 - [ ] Enable turbine with the [monitoring app](https://github.com/kmandalas/overdelivery-mgmt/tree/master/monitoring)
 - [ ] Add unit tests for inventory-service and budget-service
-- [ ] Enable the [aodm-common module](https://github.com/kmandalas/overdelivery-mgmt/tree/master/common) in order to avoid code duplication among the various microservices regarding shared DTOs
+- [ ] Enable the [aodm-common module](https://github.com/kmandalas/overdelivery-mgmt/tree/master/common) in order to avoid code duplicating shared 
+DTOs among the microservices
 - [ ] Enrich the README.md with information about the selected kafka partitioning scheme and provide the list of known issues and limitations of 
 the current project as-is
 
