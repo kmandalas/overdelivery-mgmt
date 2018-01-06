@@ -1,5 +1,6 @@
 [![Build Status](https://travis-ci.org/kmandalas/overdelivery-mgmt.svg?branch=master)](https://travis-ci.org/kmandalas/overdelivery-mgmt)
 [![GitHub license](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/kmandalas/overdelivery-mgmt/blob/master/LICENCE)
+[![codecov](https://codecov.io/gh/kmandalas/overdelivery-mgmt/branch/master/graph/badge.svg)](https://codecov.io/gh/kmandalas/overdelivery-mgmt)
 
 # overdelivery-mgmt
 A simplified proof-of-concept project for managing ads over-delivery utilizing Spring Cloud and Apache Kafka. Based on the following article:
