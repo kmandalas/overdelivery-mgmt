@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/kmandalas/overdelivery-mgmt.svg?branch=master)](https://travis-ci.org/kmandalas/overdelivery-mgmt)
 [![GitHub license](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/kmandalas/overdelivery-mgmt/blob/master/LICENCE)
 
 # overdelivery-mgmt
@@ -91,7 +92,7 @@ Run each service in different console/terminal. The recommended order is the fol
      mvn spring-boot:run    
 
 ### Eureka Dashboard ###
-Once you have started all the services, check the [Eureka dashboard](http://localhost:8761) 
+Once you have started all the services, check [Eureka dashboard](http://localhost:8761) 
 
 Keep in mind that the Service Discovery mechanism needs some time after all applications startup. 
 Any service is not available for discovery by clients until: the instance, the Eureka server and the client all have the same metadata in their 
