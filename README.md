@@ -176,15 +176,13 @@ In order to view the page navigate your browser to:
 - http://localhost:4000
 ![alt text](https://github.com/kmandalas/overdelivery-mgmt/raw/master/assets/chart.gif "demo page")
 
-## Status
-- coding: in progress
-- documentation (README.md): in progress
-- code coverage: in progress
 
 **Todo**:
 - [ ] Enable hystrix for inventory-service and budget-service
 - [ ] Enable turbine with the [monitoring app](https://github.com/kmandalas/overdelivery-mgmt/tree/master/monitoring)
 - [ ] Add unit tests for inventory-service and budget-service
+- [ ] Enrich the README.md with information about the selected kafka partitioning scheme and provide and list of known issues and limitations of 
+the current project as-is
 
 ## Feedback welcome
 I try add things and improve this project during my... "free" time. I would greatly appreciate your help. Feel free to contact me with any 
