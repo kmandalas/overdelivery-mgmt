@@ -162,7 +162,7 @@ Continue by initiating the impressions event stream:
 
 This time the generator sends the messages directly to the `impressions` kafka topic. Since this topic is partitioned by `adGroupId` and the number of consumers is equal to the number of the partitions (in our scenario this number is: 2), we guarantee that there will not be concurent modifications of the budget of a single advertiser.
 
-A kafka consumer [impressions-consumer](https://github.com/kmandalas/overdelivery-mgmt/tree/master/impressions-consumer) consumes the 
+An [impressions-consumer](https://github.com/kmandalas/overdelivery-mgmt/tree/master/impressions-consumer) instance, consumes the 
 messages of the `impressions` topic and updates the `actual_spend` accordingly (by calling the budget-service via Feign).
 
 
