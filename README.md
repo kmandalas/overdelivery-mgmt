@@ -183,8 +183,7 @@ In order to view the page navigate your browser to:
 - [ ] Enable security with OAuth2
 - [ ] Enable the [aodm-common module](https://github.com/kmandalas/overdelivery-mgmt/tree/master/common) in order to avoid code duplicating shared 
 DTOs among the microservices
-- [ ] Enrich the README.md with information about the selected kafka partitioning scheme and provide the list of known issues and limitations of 
-the current project as-is
+- [ ] Enrich the README.md with information about the selected kafka partitioning scheme and provide the list of known issues and limitations of the current project as-is
 
 ## Feedback welcome
 I try add things and improve this project during my... "free" time. I would greatly appreciate your help. Feel free to contact me with any 
