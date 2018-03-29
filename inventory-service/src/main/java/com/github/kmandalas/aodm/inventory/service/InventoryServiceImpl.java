@@ -16,17 +16,21 @@ import lombok.extern.slf4j.Slf4j;
 @RefreshScope
 public class InventoryServiceImpl implements InventoryService {
 
-	@Autowired
-	BudgetServiceClient budgetServiceClient;
+	private final BudgetServiceClient budgetServiceClient;
 
-	@Autowired
-	MessageService messageService;
+	private final MessageService messageService;
 
 	@Value("${impression-rate}")
 	private Double impressionRate;
 
 	@Value("${action-rate}")
 	private Double actionRate;
+
+	@Autowired
+	public InventoryServiceImpl(BudgetServiceClient budgetServiceClient, MessageService messageService) {
+		this.budgetServiceClient = budgetServiceClient;
+		this.messageService = messageService;
+	}
 
 	@Override
 	public boolean insertAd(final int adGroupId, final String domain) {

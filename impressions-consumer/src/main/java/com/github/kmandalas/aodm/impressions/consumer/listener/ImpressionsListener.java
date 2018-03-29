@@ -21,8 +21,12 @@ public class ImpressionsListener {
 	@Value("${partition-no}")
 	private String topicPartition;
 
+	private final BudgetServiceClient budgetServiceClient;
+
 	@Autowired
-	BudgetServiceClient budgetServiceClient;
+	public ImpressionsListener(BudgetServiceClient budgetServiceClient) {
+		this.budgetServiceClient = budgetServiceClient;
+	}
 
 	@KafkaListener(topicPartitions = @TopicPartition(topic = "${source-topic}", partitions = {"${partition-no}"}))
 	public void consume(Impression message) {

@@ -14,8 +14,12 @@ import com.github.kmandalas.aodm.budget.repository.AccountRepository;
 @Transactional
 public class AccountServiceImpl implements AccountService {
 
+	private final AccountRepository repository;
+
 	@Autowired
-	private AccountRepository repository;
+	public AccountServiceImpl(AccountRepository repository) {
+		this.repository = repository;
+	}
 
 	@Override
 	public List<Account> findEligible() {

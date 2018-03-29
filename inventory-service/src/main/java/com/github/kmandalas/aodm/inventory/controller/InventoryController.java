@@ -16,8 +16,12 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class InventoryController {
 
+	private final InventoryService inventoryService;
+
 	@Autowired
-	InventoryService inventoryService;
+	public InventoryController(InventoryService inventoryService) {
+		this.inventoryService = inventoryService;
+	}
 
 	@PostMapping
 	@ResponseStatus(HttpStatus.OK)

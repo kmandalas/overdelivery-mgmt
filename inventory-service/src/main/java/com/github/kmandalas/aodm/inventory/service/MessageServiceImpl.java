@@ -16,8 +16,12 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class MessageServiceImpl implements MessageService {
 
+	private final InsertionsProducer producer;
+
 	@Autowired
-	InsertionsProducer producer;
+	public MessageServiceImpl(InsertionsProducer producer) {
+		this.producer = producer;
+	}
 
 	@Async
 	public void doSend(Insertion message) {

@@ -25,8 +25,12 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class BudgetController {
 
+	private final AccountService accountService;
+
 	@Autowired
-	AccountService accountService;
+	public BudgetController(AccountService accountService) {
+		this.accountService = accountService;
+	}
 
 	@GetMapping("/eligible")
 	@ResponseStatus(HttpStatus.OK)

@@ -7,12 +7,3 @@ spring:
       fail-fast: true
       # username: user
       # password: ${CONFIG_SERVICE_PASSWORD}
-
-eureka:
-  instance:
-    prefer-ip-address: true
-  client:
-    registerWithEureka: false
-    fetchRegistry: false
-    server:
-      waitTimeInMsWhenSyncEmpty: 0
