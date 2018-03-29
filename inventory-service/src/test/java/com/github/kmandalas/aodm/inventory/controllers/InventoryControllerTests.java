@@ -3,10 +3,10 @@ package com.github.kmandalas.aodm.inventory.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.kmandalas.aodm.inventory.transport.AccountDTO;
+import com.github.kmandalas.aodm.inventory.transport.InsertionDTO;
 import com.github.tomakehurst.wiremock.junit.WireMockClassRule;
 import com.netflix.loadbalancer.Server;
 import com.netflix.loadbalancer.ServerList;
-import org.json.JSONObject;
 import org.junit.Before;
 import org.junit.ClassRule;
 import org.junit.Test;
@@ -49,8 +49,8 @@ public class InventoryControllerTests {
 
   private static final String URI = "/inventory";
 
-  private static final String AD_GROUP_ID = "adGroupId";
-  private static final String DOMAIN = "domain";
+  private static final int ELIGIBLE_AD_GROUP_ID = 999;
+  private static final int INELIGIBLE_AD_GROUP_ID = 1000;
 
   private MockMvc mockMvc;
 
@@ -98,30 +98,24 @@ public class InventoryControllerTests {
 
   @Test
   public void insertAd_shouldReturnSuccessfully_whenUnderBudget() throws Exception {
-
-    JSONObject CREATE_REQUEST = new JSONObject()
-            .put(AD_GROUP_ID, 999)
-            .put(DOMAIN, "whatever.com");
+    InsertionDTO insertionDTO = InsertionDTO.builder().adGroupId(ELIGIBLE_AD_GROUP_ID).domain("whatever.com").build();
 
     mockMvc.perform(post(URI)
             .accept(MediaType.APPLICATION_JSON_UTF8_VALUE)
             .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE)
-            .content(CREATE_REQUEST.toString()))
+            .content(MAPPER.writeValueAsString(insertionDTO)))
             .andExpect(status().isOk())
             .andExpect(jsonPath("$").value(true));
   }
 
   @Test
   public void insertAd_shouldReturnSuccessfully_whenOverBudget() throws Exception {
-
-    JSONObject CREATE_REQUEST = new JSONObject()
-            .put(AD_GROUP_ID, 1000)
-            .put(DOMAIN, "whatever.com");
+    InsertionDTO insertionDTO = InsertionDTO.builder().adGroupId(INELIGIBLE_AD_GROUP_ID).domain("whatever.com").build();
 
     mockMvc.perform(post(URI)
             .accept(MediaType.APPLICATION_JSON_UTF8_VALUE)
             .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE)
-            .content(CREATE_REQUEST.toString()))
+            .content(MAPPER.writeValueAsString(insertionDTO)))
             .andExpect(status().isOk())
             .andExpect(jsonPath("$").value(false));
   }
