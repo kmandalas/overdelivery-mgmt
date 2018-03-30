@@ -1,53 +1,48 @@
 package com.github.kmandalas.aodm.budget.domain;
 
-import java.io.Serializable;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
+import lombok.Builder;
+import lombok.Data;
 import org.hibernate.envers.Audited;
 
-import lombok.Data;
+import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "accounts")
 @Data
+@Builder
 @Audited
 public class Account implements Serializable {
 
-	private static final long serialVersionUID = 3726476090044799835L;
+  private static final long serialVersionUID = 3726476090044799835L;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Integer id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.AUTO)
+  private Integer id;
 
-	@Column(nullable = false, unique = true)
-	private Integer adGroupId;
+  @Column(nullable = false, unique = true)
+  private Integer adGroupId;
 
-	@Column(nullable = false, unique = true)
-	private String adGroupName;
+  @Column(nullable = false, unique = true)
+  private String adGroupName;
 
-	@Column
-	private Double actualSpend;
+  @Column
+  private Double actualSpend;
 
-	@Column
-	private Double inFlightSpend;
+  @Column
+  private Double inFlightSpend;
 
-	@Column(nullable = false)
-	private Double dailyBudget;
+  @Column(nullable = false)
+  private Double dailyBudget;
 
-	@Column(nullable = false)
-	private Double itemPrice;
+  @Column(nullable = false)
+  private Double itemPrice;
 
-	public void increaseActual(double amt) {
-		actualSpend += amt;
-	}
+  public void increaseActual(double amt) {
+    actualSpend += amt;
+  }
 
-	public void increaseInflight(double amt) {
-		inFlightSpend += amt;
-	}
+  public void increaseInflight(double amt) {
+    inFlightSpend += amt;
+  }
 }

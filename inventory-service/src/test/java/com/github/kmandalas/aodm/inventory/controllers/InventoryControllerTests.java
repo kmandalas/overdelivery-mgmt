@@ -2,6 +2,7 @@ package com.github.kmandalas.aodm.inventory.controllers;
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.kmandalas.aodm.inventory.controller.InventoryController;
 import com.github.kmandalas.aodm.inventory.transport.AccountDTO;
 import com.github.kmandalas.aodm.inventory.transport.InsertionDTO;
 import com.github.tomakehurst.wiremock.junit.WireMockClassRule;
@@ -41,21 +42,19 @@ public class InventoryControllerTests {
   private static final String SPRING_CLOUD_BUS_TOPIC = "springCloudBus-0";
   private static final ObjectMapper MAPPER = new ObjectMapper();
 
+  private static final int ELIGIBLE_AD_GROUP_ID = 999;
+  private static final int INELIGIBLE_AD_GROUP_ID = 1000;
+
   @ClassRule
   public static KafkaEmbedded embeddedKafka = new KafkaEmbedded(1, true, DEFAULT_TOPIC, SPRING_CLOUD_BUS_TOPIC);
 
   @ClassRule
   public static WireMockClassRule wiremock = new WireMockClassRule(wireMockConfig().dynamicPort());
 
-  private static final String URI = "/inventory";
-
-  private static final int ELIGIBLE_AD_GROUP_ID = 999;
-  private static final int INELIGIBLE_AD_GROUP_ID = 1000;
-
-  private MockMvc mockMvc;
-
   @Autowired
   private WebApplicationContext webApplicationContext;
+
+  private MockMvc mockMvc;
 
   @Before
   public void setupMockMvc() throws Exception {
@@ -65,7 +64,7 @@ public class InventoryControllerTests {
 
     AccountDTO eligibleAccount = AccountDTO.builder()
             .id(999)
-            .adGroupId(999)
+            .adGroupId(ELIGIBLE_AD_GROUP_ID)
             .actualSpend(400.00)
             .inFlightSpend(99.98)
             .dailyBudget(500.00)
@@ -74,21 +73,21 @@ public class InventoryControllerTests {
 
     AccountDTO inelegibleAccount = AccountDTO.builder()
             .id(1000)
-            .adGroupId(1000)
+            .adGroupId(INELIGIBLE_AD_GROUP_ID)
             .actualSpend(400.00)
             .inFlightSpend(100.02)
             .dailyBudget(500.00)
             .itemPrice(0.2)
             .build();
 
-    stubFor(get(urlEqualTo("/budget/999"))
+    stubFor(get(urlEqualTo("/budget/" + ELIGIBLE_AD_GROUP_ID))
             .withHeader("Content-Type", equalTo("application/json;charset=UTF-8"))
             .willReturn(aResponse()
                     .withHeader("Content-Type", "application/json;charset=UTF-8")
                     .withStatus(HttpStatus.OK.value())
                     .withBody(MAPPER.writeValueAsString(eligibleAccount))));
 
-    stubFor(get(urlEqualTo("/budget/1000"))
+    stubFor(get(urlEqualTo("/budget/" + INELIGIBLE_AD_GROUP_ID))
             .withHeader("Content-Type", equalTo("application/json;charset=UTF-8"))
             .willReturn(aResponse()
                     .withHeader("Content-Type", "application/json;charset=UTF-8")
@@ -100,7 +99,7 @@ public class InventoryControllerTests {
   public void insertAd_shouldReturnSuccessfully_whenUnderBudget() throws Exception {
     InsertionDTO insertionDTO = InsertionDTO.builder().adGroupId(ELIGIBLE_AD_GROUP_ID).domain("whatever.com").build();
 
-    mockMvc.perform(post(URI)
+    mockMvc.perform(post(InventoryController.CONTROLLER_PATH)
             .accept(MediaType.APPLICATION_JSON_UTF8_VALUE)
             .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE)
             .content(MAPPER.writeValueAsString(insertionDTO)))
@@ -112,7 +111,7 @@ public class InventoryControllerTests {
   public void insertAd_shouldReturnSuccessfully_whenOverBudget() throws Exception {
     InsertionDTO insertionDTO = InsertionDTO.builder().adGroupId(INELIGIBLE_AD_GROUP_ID).domain("whatever.com").build();
 
-    mockMvc.perform(post(URI)
+    mockMvc.perform(post(InventoryController.CONTROLLER_PATH)
             .accept(MediaType.APPLICATION_JSON_UTF8_VALUE)
             .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE)
             .content(MAPPER.writeValueAsString(insertionDTO)))
